@@ -12,6 +12,8 @@ public class Main {
         daftarObat.add(new Obat("1", "Bodrex",2000));
         daftarObat.add(new Obat("2", "Paramex",5000));
         daftarObat.add(new Obat("3", "OBH",3000));
+        daftarObat.add(new Obat("4", "Tolak Angin",5000));
+        daftarObat.add(new Obat("5", "Antimo",10000));
 
         Pembeli pembeli = new Pembeli("UID1", "Aljabbar", "0824141", "Bandar Lampung");
 
