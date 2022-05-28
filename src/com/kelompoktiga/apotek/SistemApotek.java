@@ -20,10 +20,11 @@ public class SistemApotek {
         System.out.println("Selamat Datang di Apotek Dos.");
     }
 
-    public void mulai() {
+    public void menuPembeli() {
         aktif = true;
+
+        System.out.println("Anda masuk sebagai Pembeli.");
         while (aktif) {
-            System.out.println("Anda masuk sebagai Pembeli.");
             System.out.println("1. Tambah Obat Ke Keranjang");
             System.out.println("2. Lihat isi Keranjang");
             System.out.println("3. Cari Obat");
@@ -42,6 +43,29 @@ public class SistemApotek {
                 default -> System.out.println("Input Salah!");
             }
         }
+    }
+
+    public void menuApoteker() {
+        aktif = true;
+        System.out.println("Anda masuk sebagai Apoteker");
+        while (aktif) {
+            System.out.println("1. Tambah Obat");
+            System.out.println("2. Exit");
+            System.out.print("Pilih Menu [1-2]: ");
+            pilihan = input.nextLine();
+
+            switch (pilihan) {
+                case "1" -> tambahObat();
+                case "2" -> {
+                    aktif = false;
+                    System.out.println("Program Selesai.");
+                }
+                default -> System.out.println("Input Salah!");
+            }
+        }
+    }
+
+    private void tambahObat() {
     }
 
     private void lihatKeranjang() {

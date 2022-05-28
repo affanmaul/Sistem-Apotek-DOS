@@ -1,8 +1,11 @@
 package com.kelompoktiga.apotek;
 
+import com.kelompoktiga.apotek.model.Obat;
 import com.kelompoktiga.apotek.user.Apoteker;
 import com.kelompoktiga.apotek.user.Pembeli;
 import com.kelompoktiga.apotek.user.User;
+
+import java.util.ArrayList;
 
 public class TestClass {
     public static void main(String[] args) {
@@ -16,6 +19,10 @@ public class TestClass {
 
         /*
          * Cek Instance Of
+         *
+         * instanceof adalah salah satu keyword pada Java, yang digunakan untuk membandingkan suatu objek,
+         * apakah instansiasi dari suatu class atau tidak, hasil dari perbandingan tersebut akan menghasilkan
+         * nilai boolean berupa nilai true atau false.
          */
         System.out.println(pembeli1 instanceof Pembeli);
         System.out.println(pembeli1 instanceof User);
@@ -23,4 +30,5 @@ public class TestClass {
         System.out.println(apoteker1 instanceof Apoteker);
         System.out.println(apoteker1 instanceof User);
     }
+
 }

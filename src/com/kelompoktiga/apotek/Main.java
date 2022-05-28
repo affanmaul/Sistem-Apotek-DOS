@@ -17,7 +17,9 @@ public class Main {
 
         Pembeli pembeli = new Pembeli("UID1", "Aljabbar", "0824141", "Bandar Lampung");
 
-        SistemApotek sistemApotek = new SistemApotek(daftarObat, pembeli);
-        sistemApotek.mulai();
+        SistemApotek sistemApotek = new SistemApotek(daftarObat, pembeli1);
+        sistemApotek.menuPembeli();
+
+        Apoteker apoteker1 = new Apoteker("APK1", "Pak Waluyo", "0824141", "Bandar Lampung");
     }
 }
