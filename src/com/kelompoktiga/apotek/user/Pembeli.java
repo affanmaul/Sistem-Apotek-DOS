@@ -12,7 +12,7 @@ public class Pembeli extends User{
         super(userId, nama, nomorTelepon, alamat);
     }
 
-    public void tambahkeKeranjang(Obat obat, int totalBarang) {
+    public void tambahKeKeranjang(Obat obat, int totalBarang) {
         this.keranjang.tambahObat(obat);
         this.keranjang.setTotalBarang(this.keranjang.getTotalBarang() + totalBarang);
 

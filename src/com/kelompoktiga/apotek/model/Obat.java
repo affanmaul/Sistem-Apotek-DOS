@@ -10,7 +10,11 @@ public class Obat {
         this.nama = nama;
         this.harga = harga;
     }
-
+    public void cetakObat(){
+        System.out.println("Id obat : " + idObat);
+        System.out.println("nama obat : "+nama);
+        System.out.println("harga obat : "+ harga);
+    }
     public String getIdObat() {
         return idObat;
     }
