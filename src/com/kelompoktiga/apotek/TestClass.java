@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class TestClass {
     public static void main(String[] args) {
-        Pembeli pembeli1 = new Pembeli("UID1", "Affan", "089619258610", "Bandar Lampung");
-        User pembeli2 = new Pembeli("UID2", "Wafa", "089898989343", "Pringsewu");
+        Pembeli pembeli1 = new Pembeli("affan", "UID1", "Affan", "089619258610", "Bandar Lampung");
+        User pembeli2 = new Pembeli("wafa", "UID2", "Wafa", "089898989343", "Pringsewu");
 //        Pembeli pembeli3 = new User("3", "Al", "4124", "fadfsad");
 
-        Apoteker apoteker1 = new Apoteker("APK1", "Pak Waluyo", "0824141", "Bandar Lampung");
-        User apoteker2 = new Apoteker("APK1", "Pak Joko", "0824141", "Bandar Lampung");
+        Apoteker apoteker1 = new Apoteker("waluyo", "APK1", "Pak Waluyo", "0824141", "Bandar Lampung");
+        User apoteker2 = new Apoteker("joko", "APK1", "Pak Joko", "0824141", "Bandar Lampung");
 //        Apoteker apoteker3 = new User("UID1", "Aljabbar", "0824141", "Bandar Lampung");
 
         /*

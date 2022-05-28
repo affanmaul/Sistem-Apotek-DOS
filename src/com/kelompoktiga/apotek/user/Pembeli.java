@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Pembeli extends User{
     private Keranjang keranjang = new Keranjang();
 
-    public Pembeli(String userId, String nama, String nomorTelepon, String alamat) {
-        super(userId, nama, nomorTelepon, alamat);
+    public Pembeli(String username, String userId, String nama, String nomorTelepon, String alamat) {
+        super(username, userId, nama, nomorTelepon, alamat);
     }
 
     public void tambahKeKeranjang(Obat obat, int totalBarang) {

@@ -20,8 +20,8 @@ public class Main {
         SistemApotek sistemApotek = new SistemApotek(daftarObat);
 
 
-        sistemApotek.tambahUser(new Pembeli("UID1", "Aljabbar", "0824141", "Bandar Lampung"));
-        sistemApotek.tambahUser(new Apoteker("APK1", "Pak Waluyo", "0824141", "Bandar Lampung"));
+        sistemApotek.tambahUser(new Pembeli("aljabbar", "U1", "Aljabbar", "0824141", "Bandar Lampung"));
+        sistemApotek.tambahUser(new Apoteker("waluyo","AP1", "Pak Waluyo", "0824141", "Bandar Lampung"));
         sistemApotek.loginManager();
     }
 }

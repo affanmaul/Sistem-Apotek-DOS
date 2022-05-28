@@ -2,12 +2,14 @@ package com.kelompoktiga.apotek.user;
 
 public class User {
     // atribut
+    private String username;
     private String userId;
     private String nama;
     private String nomorTelepon;
     private String alamat;
 
-    public User(String userId, String nama, String nomorTelepon, String alamat) {
+    public User(String username, String userId, String nama, String nomorTelepon, String alamat) {
+        this.username = username;
         this.userId = userId;
         this.nama = nama;
         this.nomorTelepon = nomorTelepon;
@@ -44,5 +46,13 @@ public class User {
 
     public void setAlamat(String alamat) {
         this.alamat = alamat;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

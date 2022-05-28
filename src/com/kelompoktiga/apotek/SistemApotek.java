@@ -26,7 +26,27 @@ public class SistemApotek {
     }
 
     public void loginManager(){
+        while (true) {
+            System.out.print("Masukan username Anda : ");
+            String username = input.nextLine();
+            User user = cariUserByUsername(username);
 
+            if (user instanceof Pembeli) {
+                menuPembeli();
+            } else if (user instanceof Apoteker) {
+                menuApoteker();
+            } else {
+                System.out.println("Data tidak Ditemukan");
+            }
+        }
+    }
+
+    public User cariUserByUsername(String username) {
+        for (User u : daftarUser) {
+            if (u.getUsername().equals(username)) {
+                return u;
+            }
+        } return null;
     }
 
     public void menuPembeli() {
