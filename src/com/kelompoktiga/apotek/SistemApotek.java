@@ -1,23 +1,32 @@
 package com.kelompoktiga.apotek;
 
 import com.kelompoktiga.apotek.model.Obat;
+import com.kelompoktiga.apotek.user.Apoteker;
 import com.kelompoktiga.apotek.user.Pembeli;
+import com.kelompoktiga.apotek.user.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SistemApotek {
     private ArrayList<Obat> daftarObat = new ArrayList<Obat>();
+    private ArrayList<Pembeli> daftarPembeli = new ArrayList<>();
+    private ArrayList<Apoteker> daftarApoteker = new ArrayList<>();
+    private ArrayList<User> daftarUser = new ArrayList<User>();
+    private Apoteker apoteker;
     private Pembeli pembeli;
 
     private Scanner input = new Scanner(System.in);
     private String pilihan;
     private boolean aktif ;
 
-    public SistemApotek(ArrayList<Obat> daftarObat, Pembeli pembeli) {
+    public SistemApotek(ArrayList<Obat> daftarObat) {
         this.daftarObat = daftarObat;
-        this.pembeli = pembeli;
         System.out.println("Selamat Datang di Apotek Dos.");
+    }
+
+    public void loginManager(){
+
     }
 
     public void menuPembeli() {
@@ -78,7 +87,7 @@ public class SistemApotek {
         if (obat != null){
             obat.cetakObat();
         }else {
-            System.out.println(" Gaada cok");
+            System.out.println("Data Tidak Ditemukan.");
         }
 
 
@@ -106,5 +115,9 @@ public class SistemApotek {
                 pembeli.tambahKeKeranjang(itemObat, jumlahObat);
             }
         }
+    }
+
+    public void tambahUser(User user){
+        this.daftarUser.add(user);
     }
 }
