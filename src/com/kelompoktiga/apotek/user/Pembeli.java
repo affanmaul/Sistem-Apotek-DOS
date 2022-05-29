@@ -1,34 +1,36 @@
 package com.kelompoktiga.apotek.user;
 
-import com.kelompoktiga.apotek.model.Obat;
+import com.kelompoktiga.apotek.model.ItemKeranjang;
 import com.kelompoktiga.apotek.model.Keranjang;
+import com.kelompoktiga.apotek.model.Obat;
 
-import java.util.ArrayList;
-
-public class Pembeli extends User{
+public class Pembeli extends User {
     private Keranjang keranjang = new Keranjang();
 
+    /**
+     *  Constructor kelas Pembeli
+     */
     public Pembeli(String username, String userId, String nama, String nomorTelepon, String alamat) {
         super(username, userId, nama, nomorTelepon, alamat);
     }
 
-    public void tambahKeKeranjang(Obat obat, int totalBarang) {
-        this.keranjang.tambahObat(obat);
-        this.keranjang.setTotalBarang(this.keranjang.getTotalBarang() + totalBarang);
+    public void tambahObatKeKeranjang(Obat obat, int jumlahBarang) {
+        this.keranjang.tambahObat(obat, jumlahBarang);
+    }
 
-        float totalHarga = totalBarang * obat.getHarga();
-        this.keranjang.setTotalHarga(this.keranjang.getTotalHarga() + totalHarga);
-        System.out.println("Berhasil menambahkan barang.\n");
+    public void hapusObatDariKeranjang(int indexObat) {
+        this.keranjang.hapusObat(indexObat);
+    }
+
+    public void hapusSeluruhIsiKeranjang() {
+        this.keranjang.hapusSeluruhData();
     }
 
     public void lihatKeranjang() {
-        System.out.println("\nMenampilkan isi keranjang:");
-        System.out.print("Obat: ");
-        for(Obat obat: keranjang.getDaftarObat()){
-            System.out.print(obat.getNama() + ", ");
-        }
-        System.out.println("\nTotal Barang: " + keranjang.getTotalBarang());
-        System.out.println("Total Harga: " + keranjang.getTotalHarga());
-        System.out.println();
+        keranjang.cetakDataKeranjang();
+    }
+
+    public Keranjang getKeranjang() {
+        return keranjang;
     }
 }

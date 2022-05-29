@@ -16,9 +16,7 @@ public class Main {
         daftarObat.add(new Obat("4", "Tolak Angin", 5000));
         daftarObat.add(new Obat("5", "Antimo", 10000));
 
-
         SistemApotek sistemApotek = new SistemApotek(daftarObat);
-
 
         sistemApotek.tambahUser(new Pembeli("aljabbar", "U1", "Aljabbar", "0824141", "Bandar Lampung"));
         sistemApotek.tambahUser(new Apoteker("waluyo","AP1", "Pak Waluyo", "0824141", "Bandar Lampung"));
