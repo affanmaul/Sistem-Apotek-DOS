@@ -69,8 +69,9 @@ public class SistemApotek {
             System.out.println("3. Lihat isi Keranjang");
             System.out.println("4. Hapus Seluruh isi Keranjang");
             System.out.println("5. Cari Obat");
-            System.out.println("6. Exit");
-            System.out.print("Pilih Menu [1-6]: ");
+            System.out.println("6. Info akun");
+            System.out.println("7. Exit");
+            System.out.print("Pilih Menu [1-7]: ");
             pilihan = input.nextLine();
 
             switch (pilihan) {
@@ -79,7 +80,8 @@ public class SistemApotek {
                 case "3" -> lihatKeranjang();
                 case "4" -> hapusSeluruhItemKeranjang();
                 case "5" -> cariObat();
-                case "6" -> {
+                case "6" -> infoAkunPembeli();
+                case "7" -> {
                     aktif = false;
                     System.out.println("Keluar Akun.");
                 }
@@ -172,6 +174,11 @@ public class SistemApotek {
             }
         }
         return null; // jika tidak ada yang sama maka return null
+    }
+
+    public void infoAkunPembeli ()
+    {
+        pembeli.cetakInfo();
     }
 
     /**

@@ -16,6 +16,13 @@ public class User {
         this.alamat = alamat;
     }
 
+    public void cetakInfo() {
+        System.out.println("id : " + this.userId);
+        System.out.println("Nama :" + this.nama);
+        System.out.println("No Hp : "+ this.nomorTelepon);
+        System.out.println("Alamat :" + this.alamat);
+    }
+
     public String getUserId() {
         return userId;
     }

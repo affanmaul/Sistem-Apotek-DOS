@@ -4,6 +4,7 @@ public class Obat {
     private String idObat;
     private String nama;
     private float harga;
+    private boolean obatKeras = false;
 
     public Obat(String idObat, String nama, float harga) {
         this.idObat = idObat;
@@ -11,10 +12,22 @@ public class Obat {
         this.harga = harga;
     }
 
+    public Obat(String idObat, String nama, float harga, boolean obatKeras) {
+        this(idObat,nama, harga);
+        this.obatKeras = obatKeras;
+
+    }
+
     public void cetakObat() {
         System.out.println("Id obat : " + idObat);
         System.out.println("nama obat : " + nama);
         System.out.println("harga obat : Rp." + harga);
+        if (obatKeras == true){
+            System.out.println("Merupakan obat keras");
+        }
+        else {
+            System.out.println("Bukan merupakan obat keras");
+        }
     }
 
     public String getIdObat() {

@@ -33,4 +33,13 @@ public class Pembeli extends User {
     public Keranjang getKeranjang() {
         return keranjang;
     }
+
+    @Override
+    public void cetakInfo() {
+        System.out.println();
+        System.out.println("Mencetak data Pembeli ");
+        super.cetakInfo();
+        lihatKeranjang();
+    }
+
 }
