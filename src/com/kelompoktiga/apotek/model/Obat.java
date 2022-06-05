@@ -5,15 +5,22 @@ public class Obat {
     private String nama;
     private float harga;
     private boolean obatKeras = false;
+    private static long idCounter = 1;  // untuk pembuatan ID
 
-    public Obat(String idObat, String nama, float harga) {
-        this.idObat = idObat;
+    public Obat(String nama, float harga) {
         this.nama = nama;
         this.harga = harga;
+
+        // pembuatan ID dilakukan secara otomatis di dalam kelas ini ketika objek dibuat
+        this.idObat = createId();
     }
 
-    public Obat(String idObat, String nama, float harga, boolean obatKeras) {
-        this(idObat,nama, harga);
+    private String createId() {
+        return String.valueOf(idCounter++);
+    }
+
+    public Obat(String nama, float harga, boolean obatKeras) {
+        this(nama, harga);
         this.obatKeras = obatKeras;
 
     }
