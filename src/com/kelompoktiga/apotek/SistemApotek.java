@@ -6,6 +6,7 @@ import com.kelompoktiga.apotek.user.Pembeli;
 import com.kelompoktiga.apotek.user.User;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SistemApotek {
@@ -29,8 +30,9 @@ public class SistemApotek {
             System.out.print("Masukan username Anda : ");
             String userInput = input.nextLine();
 
-            if (userInput.equals("exit")){
+            if (userInput.equals("exit")) {
                 System.out.println("Program berakhir.");
+                input.close();  // menutup scanner
                 break;
             } else {
                 User user = cariUserByUsername(userInput); // Mengecek username yang diinputkan
@@ -57,7 +59,7 @@ public class SistemApotek {
     }
 
     /**
-     *  Menu untuk User sebagai PEMBELI
+     * Menu untuk User sebagai PEMBELI
      */
     public void menuPembeli() {
         aktif = true;
@@ -90,7 +92,6 @@ public class SistemApotek {
         }
     }
 
-    
     private Obat pilihObat() {
         System.out.println("\nMenampilkan Daftar Obat:");
         // Menampilkan daftar obat
@@ -106,17 +107,25 @@ public class SistemApotek {
                 return itemObat;
             }
         }
-        return  null;
+        return null;
     }
 
-    private void tambahObatKeKeranjang(){
+    private void tambahObatKeKeranjang() {
         Obat obat = pilihObat();
         // jika obat yang dipilih valid / tidak null
         // maka minta input jumlah obat dan tambah ke keranjang
-        if (obat != null){
-            System.out.print("Masukkan jumlah obat: ");
-            int jumlahObat = Integer.parseInt(input.nextLine());
-            pembeli.tambahObatKeKeranjang(obat, jumlahObat);
+        if (obat != null) {
+            try {
+                System.out.print("Masukkan jumlah obat: ");
+                int jumlahObat = input.nextInt();
+                pembeli.tambahObatKeKeranjang(obat, jumlahObat);
+            } catch (InputMismatchException e) {
+                System.out.println("Input yang dimasukkan salah.");
+                System.out.println(e.getMessage());
+                System.out.println();
+            } catch (Exception e){
+                System.out.println("Maaf terjadi Kesalahan.");
+            }
         } else {
             System.out.println("Maaf terjadi kesalahan.");
         }
@@ -130,9 +139,17 @@ public class SistemApotek {
             // jika keranjang tidak kosong,
             // maka tampilkan keranjang dan minta input nomor yang ingin dihapus
             lihatKeranjang();
-            System.out.print("Masukkan nomor obat yang ingin anda hapus: ");
-            pilihan = input.nextLine();
-            pembeli.hapusObatDariKeranjang(Integer.parseInt(pilihan));
+            try {
+                System.out.print("Masukkan nomor obat yang ingin anda hapus: ");
+                pilihan = input.nextLine();
+                pembeli.hapusObatDariKeranjang(Integer.parseInt(pilihan));
+            } catch (NumberFormatException e) {
+                System.out.println("Format Input yang dimasukkan salah");
+                System.out.println(e.getMessage());
+                System.out.println();
+            } catch (Exception e){
+                System.out.println("Maaf terjadi Kesalahan.");
+            }
         }
     }
 
@@ -140,7 +157,7 @@ public class SistemApotek {
         pembeli.lihatKeranjang();
     }
 
-    private void hapusSeluruhItemKeranjang(){
+    private void hapusSeluruhItemKeranjang() {
         if (pembeli.getKeranjang().getDaftarItem().isEmpty()) {
             System.out.println("Keranjang anda masih kosong.\n");
         } else {
@@ -154,13 +171,15 @@ public class SistemApotek {
         // cek obat berdasarkan nama yang diinput
         Obat obat = cekObatByNama(namaObat);
 
-        // jika valid maka tampilkan data obat
-        if (obat != null) {
+        try {
             System.out.println("Data obat ditemukan: ");
             obat.cetakObat();
             System.out.println();
-        } else {
-            System.out.println("Data Tidak Ditemukan.\n");
+        } catch (NullPointerException e) {
+            System.out.println("Data Obat tidak ditemukan");
+            System.out.println(e.getMessage());
+        } catch (Exception e){
+            System.out.println("Maaf terjadi Kesalahan.");
         }
     }
 
@@ -176,13 +195,12 @@ public class SistemApotek {
         return null; // jika tidak ada yang sama maka return null
     }
 
-    public void infoAkunPembeli ()
-    {
+    public void infoAkunPembeli() {
         pembeli.cetakInfo();
     }
 
     /**
-     *  MENU Untuk User Sebagai APOTEKER
+     * MENU Untuk User Sebagai APOTEKER
      */
     public void menuApoteker() {
         aktif = true;
