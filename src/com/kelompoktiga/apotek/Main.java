@@ -11,12 +11,12 @@ public class Main {
 
     public static void main(String[] args) {
         ArrayList<Obat> daftarObat = new ArrayList<>();
-        daftarObat.add(new Obat("1", "Bodrex", 2000));
-        daftarObat.add(new Obat("2", "Paramex", 5000));
-        daftarObat.add(new Obat("3", "OBH", 3000));
-        daftarObat.add(new Obat("4", "Tolak Angin", 5000));
-        daftarObat.add(new Obat("5", "Antimo", 10000));
-        daftarObat.add(new Obat("6", "daktarin", 7000, true));
+        daftarObat.add(new Obat("Bodrex", 2000));
+        daftarObat.add(new Obat("Paramex", 5000));
+        daftarObat.add(new Obat("OBH", 3000));
+        daftarObat.add(new Obat("Tolak Angin", 5000));
+        daftarObat.add(new Obat("Antimo", 10000));
+        daftarObat.add(new Obat("daktarin", 7000, true));
 
         SistemApotek sistemApotek = new SistemApotek(daftarObat);
 
@@ -24,9 +24,5 @@ public class Main {
         sistemApotek.tambahUser(new Pembeli("affan", "U2", "Affan", "082414133343", "Bandar Lampung"));
         sistemApotek.tambahUser(new Apoteker("waluyo","AP1", "Pak Waluyo", "0824141", "Bandar Lampung"));
         sistemApotek.loginManager();
-
-
-
-
     }
 }
