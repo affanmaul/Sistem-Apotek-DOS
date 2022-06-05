@@ -242,7 +242,6 @@ public class SistemApotek {
     }
 
     private void hapusObatDariDaftar() {
-        tampilkanDaftarObat();
         Obat obat = pilihObat();
         hapusObat(obat);
         System.out.println("Berhasil menghapus Data Obat.");
