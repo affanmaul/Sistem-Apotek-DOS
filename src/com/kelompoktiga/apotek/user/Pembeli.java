@@ -36,10 +36,12 @@ public class Pembeli extends User {
 
     @Override
     public void cetakInfo() {
-        System.out.println();
         System.out.println("Mencetak data Pembeli ");
         super.cetakInfo();
-        lihatKeranjang();
     }
 
+    public void cetakDetailInfoPembeli(){
+        cetakInfo();
+        lihatKeranjang();
+    }
 }

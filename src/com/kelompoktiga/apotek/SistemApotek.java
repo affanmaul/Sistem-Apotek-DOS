@@ -66,24 +66,27 @@ public class SistemApotek {
 
         System.out.println("\nAnda masuk sebagai Pembeli.");
         while (aktif) {
-            System.out.println("1. Tambah Obat Ke Keranjang");
-            System.out.println("2. Hapus Obat dari Keranjang");
-            System.out.println("3. Lihat isi Keranjang");
-            System.out.println("4. Hapus Seluruh isi Keranjang");
-            System.out.println("5. Cari Obat");
-            System.out.println("6. Info akun");
-            System.out.println("7. Exit");
-            System.out.print("Pilih Menu [1-7]: ");
+            System.out.println("\nMENU PEMBELI");
+            System.out.println("1. Lihat Daftar Obat");
+            System.out.println("2. Tambah Obat Ke Keranjang");
+            System.out.println("3. Hapus Obat dari Keranjang");
+            System.out.println("4. Lihat isi Keranjang");
+            System.out.println("5. Hapus Seluruh isi Keranjang");
+            System.out.println("6. Cari Obat");
+            System.out.println("7. Info akun");
+            System.out.println("8. Exit");
+            System.out.print("Pilih Menu [1-8]: ");
             pilihan = input.nextLine();
 
             switch (pilihan) {
-                case "1" -> tambahObatKeKeranjang();
-                case "2" -> hapusObatDariKeranjang();
-                case "3" -> lihatKeranjang();
-                case "4" -> hapusSeluruhItemKeranjang();
-                case "5" -> cariObat();
-                case "6" -> infoAkunPembeli();
-                case "7" -> {
+                case "1" -> tampilkanDaftarObat();
+                case "2" -> tambahObatKeKeranjang();
+                case "3" -> hapusObatDariKeranjang();
+                case "4" -> lihatKeranjang();
+                case "5" -> hapusSeluruhItemKeranjang();
+                case "6" -> cariObat();
+                case "7" -> infoAkunPembeli();
+                case "8" -> {
                     aktif = false;
                     System.out.println("Keluar Akun.");
                 }
@@ -92,12 +95,16 @@ public class SistemApotek {
         }
     }
 
-    private Obat pilihObat() {
+    private void tampilkanDaftarObat() {
         System.out.println("\nMenampilkan Daftar Obat:");
         // Menampilkan daftar obat
         for (Obat itemObat : daftarObat) {
             System.out.println(itemObat.getIdObat() + ". " + itemObat.getNama());
         }
+    }
+
+    private Obat pilihObat() {
+        tampilkanDaftarObat();
         System.out.print("Masukkan id obat: ");
         pilihan = input.nextLine();
 
@@ -112,22 +119,22 @@ public class SistemApotek {
 
     private void tambahObatKeKeranjang() {
         Obat obat = pilihObat();
-        // jika obat yang dipilih valid / tidak null
-        // maka minta input jumlah obat dan tambah ke keranjang
         if (obat != null) {
             try {
+                // jika obat yang dipilih valid / tidak null
+                // maka minta input jumlah obat dan tambah ke keranjang
                 System.out.print("Masukkan jumlah obat: ");
-                int jumlahObat = input.nextInt();
+                int jumlahObat = input.nextInt(); input.nextLine();
                 pembeli.tambahObatKeKeranjang(obat, jumlahObat);
             } catch (InputMismatchException e) {
                 System.out.println("Input yang dimasukkan salah.");
                 System.out.println(e.getMessage());
                 System.out.println();
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Maaf terjadi Kesalahan.");
             }
         } else {
-            System.out.println("Maaf terjadi kesalahan.");
+            System.out.println("Maaf Input tidak valid.");
         }
     }
 
@@ -147,7 +154,7 @@ public class SistemApotek {
                 System.out.println("Format Input yang dimasukkan salah");
                 System.out.println(e.getMessage());
                 System.out.println();
-            } catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Maaf terjadi Kesalahan.");
             }
         }
@@ -177,8 +184,9 @@ public class SistemApotek {
             System.out.println();
         } catch (NullPointerException e) {
             System.out.println("Data Obat tidak ditemukan");
-            System.out.println(e.getMessage());
-        } catch (Exception e){
+            // System.out.println(e.getMessage());
+            System.out.println();
+        } catch (Exception e) {
             System.out.println("Maaf terjadi Kesalahan.");
         }
     }
@@ -196,7 +204,7 @@ public class SistemApotek {
     }
 
     public void infoAkunPembeli() {
-        pembeli.cetakInfo();
+        pembeli.cetakDetailInfoPembeli();
     }
 
     /**
@@ -206,14 +214,21 @@ public class SistemApotek {
         aktif = true;
         System.out.println("\nAnda masuk sebagai Apoteker");
         while (aktif) {
-            System.out.println("1. Tambah Obat");
-            System.out.println("2. Exit");
-            System.out.print("Pilih Menu [1-2]: ");
+            System.out.println("\nMENU APOTEKER");
+            System.out.println("1. Lihat Daftar Obat");
+            System.out.println("2. Tambah Obat");
+            System.out.println("3. Hapus Obat");
+            System.out.println("4. Lihat Daftar User");
+            System.out.println("5. Exit");
+            System.out.print("Pilih Menu [1-5]: ");
             pilihan = input.nextLine();
 
             switch (pilihan) {
-                case "1" -> tambahObatBaru();
-                case "2" -> {
+                case "1" -> tampilkanDaftarObat();
+                case "2" -> tambahObatBaru();
+                case "3" -> hapusObatDariDaftar();
+                case "4" -> tampilkanDaftarUser();
+                case "5" -> {
                     aktif = false;
                     System.out.println("Keluar Akun.");
                 }
@@ -223,11 +238,41 @@ public class SistemApotek {
     }
 
     private void tambahObatBaru() {
-        // TODO: Create new method to add new Obat
+        apoteker.tambahObatBaru(daftarObat);
     }
 
+    private void hapusObatDariDaftar() {
+        tampilkanDaftarObat();
+        Obat obat = pilihObat();
+        hapusObat(obat);
+        System.out.println("Berhasil menghapus Data Obat.");
+    }
+
+    private void tampilkanDaftarUser() {
+        int counter = 0;
+        System.out.println();
+        for (User user: daftarUser){
+            user.cetakInfo();
+            if (user instanceof Pembeli){
+                System.out.println("Role : Pembeli");
+            } else if (user instanceof Apoteker){
+                System.out.println("Role : Apoteker");
+            }
+            System.out.println();
+            counter++;
+        }
+        System.out.println("Total User : " + counter);
+    }
 
     public void tambahUser(User user) {
         this.daftarUser.add(user);
+    }
+
+    public void tambahObat(Obat obat){
+        this.daftarObat.add(obat);
+    }
+
+    public void hapusObat(Obat obat){
+        this.daftarObat.remove(obat);
     }
 }
