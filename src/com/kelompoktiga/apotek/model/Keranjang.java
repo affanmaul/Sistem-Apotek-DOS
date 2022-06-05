@@ -48,10 +48,7 @@ public class Keranjang {
     }
 
     public void hapusObat(int indexObat) {
-        // cek jika index yang diinput melebihi ukuran arrayList atau tidak
-        if (indexObat > daftarItem.size()) {
-            System.out.println("Maaf input salah.\n");
-        } else {
+        try {
             // menampung item berdasarkan index
             ItemKeranjang itemKeranjang = daftarItem.get(indexObat - 1);
 
@@ -62,6 +59,10 @@ public class Keranjang {
             // menghapus item
             daftarItem.remove(itemKeranjang);
             System.out.println("Berhasil menghapus Obat dari keranjang.\n");
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("Input melebihi Daftar");
+        } catch (Exception e){
+            System.out.println("Maaf terjadi Kesalahan.");
         }
     }
 
