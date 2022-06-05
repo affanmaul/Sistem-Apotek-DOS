@@ -154,8 +154,6 @@ public class SistemApotek {
                 System.out.println("Format Input yang dimasukkan salah");
                 System.out.println(e.getMessage());
                 System.out.println();
-            } catch (Exception e) {
-                System.out.println("Maaf terjadi Kesalahan.");
             }
         }
     }

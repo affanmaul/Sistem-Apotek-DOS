@@ -49,16 +49,16 @@ public class Keranjang {
 
     public void hapusObat(int indexObat) {
         try {
-            // menampung item berdasarkan index
-            ItemKeranjang itemKeranjang = daftarItem.get(indexObat - 1);
+        // menampung item berdasarkan index
+        ItemKeranjang itemKeranjang = daftarItem.get(indexObat - 1);
 
-            // mengurangi total barang dan harga pada keranjang
-            totalBarang = totalBarang - itemKeranjang.getJumlahObat();
-            totalHarga = totalHarga - itemKeranjang.getJumlahObat() * itemKeranjang.getObat().getHarga();
+        // mengurangi total barang dan harga pada keranjang
+        totalBarang = totalBarang - itemKeranjang.getJumlahObat();
+        totalHarga = totalHarga - itemKeranjang.getJumlahObat() * itemKeranjang.getObat().getHarga();
 
-            // menghapus item
-            daftarItem.remove(itemKeranjang);
-            System.out.println("Berhasil menghapus Obat dari keranjang.\n");
+        // menghapus item
+        daftarItem.remove(itemKeranjang);
+        System.out.println("Berhasil menghapus Obat dari keranjang.\n");
         } catch (IndexOutOfBoundsException e){
             System.out.println("Input melebihi Daftar");
         } catch (Exception e){
