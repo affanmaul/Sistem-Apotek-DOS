@@ -60,7 +60,7 @@ public class Keranjang {
             daftarItem.remove(itemKeranjang);
             System.out.println("Berhasil menghapus Obat dari keranjang.\n");
         } catch (IndexOutOfBoundsException e){
-            System.out.println("Input melebihi Daftar");
+            System.out.println("Input melebihi Daftar.");
         } catch (Exception e){
             System.out.println("Maaf terjadi Kesalahan.");
         }
@@ -68,19 +68,17 @@ public class Keranjang {
 
     public void cetakDataKeranjang() {
         int i = 1;
-        System.out.println("\nMenampilkan isi keranjang:");
         if (getDaftarItem().isEmpty()) {
             System.out.println("Keranjang anda Kosong.\n");
         } else {
-            System.out.println("Obat: ");
+            System.out.println("Daftar Obat: ");
 
             for (ItemKeranjang item : getDaftarItem()) {
-                System.out.println(i + ". " + item.getObat().getNama() + " (" + item.getJumlahObat() + ") -> Rp." + item.getObat().getHarga() + "/obat");
+                System.out.println(i + ". " + item.getObat().getNama() + " - Rp." + item.getObat().getHarga() + "/obat"+ " (" + item.getJumlahObat() + ")");
                 i++;
             }
             System.out.println("Total Barang: " + getTotalBarang());
             System.out.println("Total Harga: " + getTotalHarga());
-            System.out.println();
         }
     }
 

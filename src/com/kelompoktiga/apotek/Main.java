@@ -3,6 +3,7 @@ package com.kelompoktiga.apotek;
 import com.kelompoktiga.apotek.model.Obat;
 import com.kelompoktiga.apotek.user.Apoteker;
 import com.kelompoktiga.apotek.user.Pembeli;
+import com.kelompoktiga.apotek.user.Rekening;
 import com.kelompoktiga.apotek.user.User;
 
 import java.util.ArrayList;
@@ -20,8 +21,10 @@ public class Main {
 
         SistemApotek sistemApotek = new SistemApotek(daftarObat);
 
-        sistemApotek.tambahUser(new Pembeli("aljabbar", "U1", "Aljabbar", "0824141", "Bandar Lampung"));
-        sistemApotek.tambahUser(new Pembeli("affan", "U2", "Affan", "082414133343", "Bandar Lampung"));
+        Rekening rekAljabbar = new Rekening("ALJABBAR RIZAL AZHAR", 999999);
+        Rekening rekAffan = new Rekening("AFFAN MAULANA", 999999);
+        sistemApotek.tambahUser(new Pembeli("aljabbar", "U1", "Aljabbar", "0824141", "Bandar Lampung", rekAljabbar));
+        sistemApotek.tambahUser(new Pembeli("affan", "U2", "Affan", "082414133343", "Bandar Lampung", rekAffan));
         sistemApotek.tambahUser(new Apoteker("waluyo","AP1", "Pak Waluyo", "0824141", "Bandar Lampung"));
         sistemApotek.loginManager();
     }

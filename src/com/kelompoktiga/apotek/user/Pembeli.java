@@ -6,12 +6,14 @@ import com.kelompoktiga.apotek.model.Obat;
 
 public class Pembeli extends User {
     private Keranjang keranjang = new Keranjang();
+    private Rekening rekening;
 
     /**
      *  Constructor kelas Pembeli
      */
-    public Pembeli(String username, String userId, String nama, String nomorTelepon, String alamat) {
+    public Pembeli(String username, String userId, String nama, String nomorTelepon, String alamat, Rekening rekening) {
         super(username, userId, nama, nomorTelepon, alamat);
+        this.rekening = rekening;
     }
 
     public void tambahObatKeKeranjang(Obat obat, int jumlahBarang) {
@@ -41,7 +43,14 @@ public class Pembeli extends User {
     }
 
     public void cetakDetailInfoPembeli(){
+        System.out.println();
+        System.out.println("====== INFO AKUN ======");
         cetakInfo();
+        System.out.println("====== KERANJANG ======");
         lihatKeranjang();
+    }
+
+    public Rekening getRekening() {
+        return rekening;
     }
 }

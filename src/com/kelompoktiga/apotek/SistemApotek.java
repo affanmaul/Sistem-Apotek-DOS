@@ -7,6 +7,7 @@ import com.kelompoktiga.apotek.user.User;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class SistemApotek {
@@ -18,6 +19,7 @@ public class SistemApotek {
     private Scanner input = new Scanner(System.in);
     private String pilihan;
     private boolean aktif;
+    boolean menuCheckout = false;
 
     public SistemApotek(ArrayList<Obat> daftarObat) {
         this.daftarObat = daftarObat;
@@ -68,14 +70,41 @@ public class SistemApotek {
         while (aktif) {
             System.out.println("\nMENU PEMBELI");
             System.out.println("1. Lihat Daftar Obat");
+            System.out.println("2. Cari Obat");
+            System.out.println("3. Menu Keranjang");
+            System.out.println("4. Checkout Isi Keranjang");
+            System.out.println("5. Info akun");
+            System.out.println("6. Exit");
+            System.out.print("Pilih Menu [1-6]: ");
+            pilihan = input.nextLine();
+
+            switch (pilihan) {
+                case "1" -> tampilkanDaftarObat();
+                case "2" -> cariObat();
+                case "3" -> menuKeranjang();
+                case "4" -> checkoutIsiKeranjang();
+                case "5" -> infoAkunPembeli();
+                case "6" -> {
+                    aktif = false;
+                    System.out.println("Keluar Akun.");
+                }
+                default -> System.out.println("Input Salah!");
+            }
+        }
+    }
+
+    private void menuKeranjang() {
+        boolean menuKeranjang = true;
+        while (menuKeranjang){
+            System.out.println("\nMenu Keranjang");
+            System.out.println("1. Lihat Daftar Obat");
             System.out.println("2. Tambah Obat Ke Keranjang");
             System.out.println("3. Hapus Obat dari Keranjang");
             System.out.println("4. Lihat isi Keranjang");
             System.out.println("5. Hapus Seluruh isi Keranjang");
-            System.out.println("6. Cari Obat");
-            System.out.println("7. Info akun");
-            System.out.println("8. Exit");
-            System.out.print("Pilih Menu [1-8]: ");
+            System.out.println("6. CHECKOUT isi Keranjang");
+            System.out.println("7. KEMBALI");
+            System.out.print("Pilih Menu [1-7]: ");
             pilihan = input.nextLine();
 
             switch (pilihan) {
@@ -84,15 +113,73 @@ public class SistemApotek {
                 case "3" -> hapusObatDariKeranjang();
                 case "4" -> lihatKeranjang();
                 case "5" -> hapusSeluruhItemKeranjang();
-                case "6" -> cariObat();
-                case "7" -> infoAkunPembeli();
-                case "8" -> {
-                    aktif = false;
-                    System.out.println("Keluar Akun.");
+                case "6" -> checkoutIsiKeranjang();
+                case "7" -> {
+                    menuKeranjang = false;
+                    System.out.println("Kembali ke menu awal.");
                 }
                 default -> System.out.println("Input Salah!");
             }
         }
+    }
+
+    private void checkoutIsiKeranjang() {
+        if (this.pembeli.getKeranjang().getDaftarItem().size() == 0){
+            System.out.println("Keranjang Kamu masih kosong..");
+        } else {
+            System.out.println();
+            System.out.println("Menampilkan isi keranjang:");
+            this.pembeli.getKeranjang().cetakDataKeranjang();
+            System.out.println();
+            menuCheckout = true;
+            while (menuCheckout){
+                System.out.println("Silahkan pilih metode pembayaran");
+                System.out.println("1. Bayar di Kasir");
+                System.out.println("2. Transfer Bank");
+                System.out.println("3. Batal");
+                System.out.print("Pilihan [1-3]: ");
+                pilihan = input.nextLine();
+                switch (pilihan) {
+                    case "1" -> bayar("KASIR");
+                    case "2" -> bayar("TRANSFER_BANK");
+                    case "3" -> menuCheckout = false;
+                    default -> System.out.println("Kembali ke menu keranjang.");
+                }
+            }
+        }
+    }
+
+    private void bayar(String metodePembayaran) {
+        if (metodePembayaran.equals("KASIR")){
+            cetakStrukPembelian();
+            menuCheckout = false;
+        } else if (metodePembayaran.equals("TRANSFER_BANK")) {
+            float sisaSaldo = this.pembeli.getRekening().getSaldo() - this.pembeli.getKeranjang().getTotalHarga();
+            if (sisaSaldo <= 2000){
+                System.out.println("Maaf saldo tidak cukup.");
+            } else {
+                this.pembeli.getRekening().setSaldo(sisaSaldo);
+                this.pembeli.getKeranjang().hapusSeluruhData();
+                System.out.println("Pembayaran berhasil");
+                menuCheckout = false;
+            }
+        }
+    }
+
+    private void cetakStrukPembelian() {
+        Random rand = new Random();
+        // random number antara 1111 to 9998
+        int uniqueCode = 1111 + rand.nextInt(8888);
+
+        System.out.println("\n=========================================");
+        System.out.println("=======STRUK PEMBAYARAN APOTEK DOS=======");
+        System.out.println("=========================================");
+        System.out.println("Kode Pembayaran: " + uniqueCode);
+        this.pembeli.getKeranjang().cetakDataKeranjang();
+        System.out.println("=========================================");
+        System.out.println("Harap tunjukkan struk pembelian ke kasir.");
+        System.out.println("=========================================\n");
+
     }
 
     private void tampilkanDaftarObat() {
@@ -124,7 +211,9 @@ public class SistemApotek {
                 // jika obat yang dipilih valid / tidak null
                 // maka minta input jumlah obat dan tambah ke keranjang
                 System.out.print("Masukkan jumlah obat: ");
-                int jumlahObat = input.nextInt(); input.nextLine();
+                int jumlahObat = input.nextInt();
+
+                input.nextLine();
                 pembeli.tambahObatKeKeranjang(obat, jumlahObat);
             } catch (InputMismatchException e) {
                 System.out.println("Input yang dimasukkan salah.");
@@ -154,8 +243,6 @@ public class SistemApotek {
                 System.out.println("Format Input yang dimasukkan salah");
                 System.out.println(e.getMessage());
                 System.out.println();
-            } catch (Exception e) {
-                System.out.println("Maaf terjadi Kesalahan.");
             }
         }
     }
